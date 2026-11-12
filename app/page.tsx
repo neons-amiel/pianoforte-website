@@ -1,12 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { branches, directionsUrl, type Branch } from "@/lib/branches";
-import { categories, countAt, inventory, type Category } from "@/lib/inventory";
+import { categories, countAt, formatPHP, inventory, type Category } from "@/lib/inventory";
 import { site } from "@/lib/site";
 import { InstrumentArt } from "@/components/InstrumentArt";
 import { Eyebrow, Flourish, KeyboardRule } from "@/components/Ornaments";
 import { Showroom } from "@/components/Showroom";
 import { JsonLd } from "@/components/JsonLd";
+import { HouseBrand } from "@/components/HouseBrand";
+import { houseFromPrice } from "@/lib/house";
 
 const regions: Branch["region"][] = ["Luzon", "Visayas", "Mindanao"];
 const offerLabel: Record<Category, string> = {
@@ -34,6 +36,7 @@ export default function Home() {
             <Image src="/brand/pianoforte-wordmark-black.svg" alt={site.name} width={220} height={41} priority unoptimized className="h-9 w-auto" />
           </Link>
           <nav className="hidden gap-9 text-xs uppercase tracking-[0.24em] md:flex">
+            <a href="#our-pianos" className="hover:text-brass">Our Pianos</a>
             <a href="#collection" className="hover:text-brass">Collection</a>
             <a href="#showrooms" className="hover:text-brass">Showrooms</a>
             <a href="#visit" className="hover:text-brass">Visit</a>
@@ -66,6 +69,12 @@ export default function Home() {
                   Find a showroom
                 </a>
               </div>
+              <a href="#our-pianos" className="group mt-8 inline-flex items-center gap-3 text-sm">
+                <span className="bg-brass px-2 py-1 text-[10px] uppercase tracking-[0.2em] text-paper">New</span>
+                <span className="border-b border-transparent group-hover:border-ink">
+                  Our own <span className="font-display text-base italic">PForte</span> digital pianos — from {formatPHP(houseFromPrice)} →
+                </span>
+              </a>
             </div>
             <div className="relative mx-auto hidden w-full max-w-md lg:block">
               <div className="absolute -inset-4 border border-brass/40" aria-hidden />
@@ -93,6 +102,8 @@ export default function Home() {
             </ul>
           </div>
         </section>
+
+        <HouseBrand />
 
         <KeyboardRule />
 

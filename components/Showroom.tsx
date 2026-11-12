@@ -49,7 +49,7 @@ export function Showroom() {
   return (
     <div>
       {/* Category tabs, set like a concert programme */}
-      <div role="tablist" aria-label="Instrument type" className="flex flex-wrap items-end justify-center gap-x-8 gap-y-3 border-b border-line pb-5">
+      <div role="tablist" aria-label="Instrument type" className="flex flex-wrap items-baseline justify-center gap-x-8 gap-y-3 border-b border-line pb-6">
         {(["All", ...categories] as Filter[]).map((c, i) => {
           const selected = filter === c;
           return (
@@ -58,11 +58,16 @@ export function Showroom() {
               role="tab"
               aria-selected={selected}
               onClick={() => setFilter(c)}
-              className={`group relative pb-1 font-display text-xl transition-colors ${selected ? "text-ink" : "text-ink-soft/60 hover:text-ink"}`}
+              className={`font-display text-lg transition-colors sm:text-xl ${
+                selected ? "font-semibold text-ink" : "font-normal text-ink-soft/50 hover:text-ink"
+              }`}
             >
-              {i > 0 && <span className="mr-2 text-sm italic text-brass">{numerals[i - 1]}.</span>}
+              {i > 0 && (
+                <span className={`mr-2 text-sm italic ${selected ? "text-brass" : "text-brass/50"}`}>
+                  {numerals[i - 1]}.
+                </span>
+              )}
               {c === "All" ? "The Full Collection" : plural[c as Category]}
-              <span className={`absolute inset-x-0 -bottom-[21px] h-px bg-ink transition-opacity ${selected ? "opacity-100" : "opacity-0"}`} />
             </button>
           );
         })}
