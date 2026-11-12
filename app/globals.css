@@ -1,26 +1,42 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-ink: #0e0d0c;        /* piano black — text, buttons, footer */
+  --color-paper: #faf8f4;      /* score paper — main background */
+  --color-ivory: #f1ede5;      /* alternate light section */
+  --color-ink-soft: #4a453e;
+  --color-brass: #7a5a34;      /* walnut — accent on light */
+  --color-brass-light: #c8a56a;/* brass — accent on black (footer) */
+  --color-line: #ddd5c6;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-cormorant);
+  --font-sans: var(--font-jost);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-jost), system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+/* Faint paper grain for the classical feel */
+.paper-grain {
+  background-image: radial-gradient(rgba(14, 13, 12, 0.035) 1px, transparent 1px);
+  background-size: 3px 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
 }
